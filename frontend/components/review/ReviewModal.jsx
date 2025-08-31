@@ -14,10 +14,10 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/Label';
-import { Textarea } from '@/components/ui/textarea';
+import { Textarea } from '@/components/ui/Textarea';
 
 import { useToast } from '@/hooks/useToast';
-import useAppStore from '@/stores/useAppStore'; // Import app store to get current user
+import useAppStore from '@/stores/useAppStore';
 import useReviewStore from '@/stores/useReviewStore';
 
 const StarRatingInput = ({ value, onChange }) => {
