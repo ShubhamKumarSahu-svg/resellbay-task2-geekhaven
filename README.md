@@ -69,7 +69,7 @@ resellbay-task2-geekhaven/
 
 ### Deployment
 
-- **Live Frontend Link:** [https://resellbay-geekhaven-frontend.vercel.app](https://resellbay-geekhaven-frontend.vercel.app)
+- **Live Frontend Link:** [https://resellbay-task2-geekhaven.vercel.app/]
 - Deployed on Vercel (see `next.config.mjs` for custom config)
 
 ---
