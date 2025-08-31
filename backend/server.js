@@ -22,8 +22,9 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: true,
+    // origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   },
   path: '/socket.io',
@@ -32,7 +33,8 @@ const io = new Server(server, {
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    // origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: true,
     credentials: true,
   })
 );
