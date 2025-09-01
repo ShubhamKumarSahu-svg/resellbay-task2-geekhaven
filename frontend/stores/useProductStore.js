@@ -108,6 +108,7 @@ const useProductStore = create((set, get) => ({
   },
 
   createProduct: async (productData) => {
+    set({ status: STATUS.LOADING, error: null });
     const { token } = useAppStore.getState();
 
     const result = await handleApiCall(
@@ -119,7 +120,13 @@ const useProductStore = create((set, get) => ({
     if (result.success && result.data?.product) {
       set((state) => ({
         products: [result.data.product, ...state.products],
+        status: STATUS.SUCCESS,
       }));
+    } else {
+      set({
+        status: STATUS.ERROR,
+        error: result.error || { message: 'Failed to create product.' },
+      });
     }
 
     return result;

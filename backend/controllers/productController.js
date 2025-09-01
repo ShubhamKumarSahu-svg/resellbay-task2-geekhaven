@@ -75,7 +75,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
 });
 
 exports.createProduct = asyncHandler(async (req, res, next) => {
-  const productData = { ...req.body, seller: req.user.id };
+  const productData = { ...req.body, seller: req.user._id };
   const product = await Product.create(productData);
 
   res.status(201).json({

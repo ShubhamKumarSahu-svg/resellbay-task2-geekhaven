@@ -133,21 +133,21 @@ const productRules = () => [
   body('condition').isIn(['New', 'Like New', 'Good', 'Fair', 'Poor']),
   body('stock')
     .optional()
-    .isInt({ min: 0, max: 9999 })
-    .withMessage('Stock must be between 0 and 9999.'),
+    .default(1)
+    .isInt({ min: 1, max: 9999 })
+    .withMessage('Stock must be between 1 and 9999.'),
+
   body('tags')
     .optional()
+    .default([])
     .isArray({ max: 20 })
     .withMessage('Cannot have more than 20 tags.'),
-  body('tags.*').optional().trim().isLength({ max: 30 }),
+
   body('images')
     .optional()
+    .default([])
     .isArray({ max: 10 })
     .withMessage('Cannot have more than 10 images.'),
-  body('images.*')
-    .optional()
-    .isURL()
-    .withMessage('Each image must be a valid URL.'),
 ];
 
 const cartItemRules = () => [

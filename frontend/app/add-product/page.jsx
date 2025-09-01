@@ -59,7 +59,7 @@ export default function AddProductPage() {
     images: [''],
   });
   const [formErrors, setFormErrors] = useState({});
-  const isSubmitting = status === STATUS.SUBMITTING;
+  const isSubmitting = status === STATUS.LOADING;
 
   useEffect(() => {
     if (!isAuthInitialized) return;
@@ -141,22 +141,25 @@ export default function AddProductPage() {
       });
       return;
     }
-    try {
-      const payload = {
-        ...productData,
-        price: parseFloat(productData.price),
-        images: productData.images.filter((img) => img && img.trim() !== ''),
-      };
-      const newProduct = await createProduct(payload);
+
+    const payload = {
+      ...productData,
+      price: parseFloat(productData.price),
+      images: productData.images.filter((img) => img && img.trim() !== ''),
+    };
+
+    const result = await createProduct(payload);
+
+    if (result.success && result.data?.product) {
       toast({
         title: 'Success!',
         description: 'Your product has been listed successfully.',
       });
-      router.push(`/products/${newProduct._id}`);
-    } catch (error) {
+      router.push(`/products/${result.data.product._id}`);
+    } else {
       toast({
         title: 'Submission Failed',
-        description: error.message || 'An unknown error occurred.',
+        description: result.error?.message || 'An unknown error occurred.',
         variant: 'destructive',
       });
     }
